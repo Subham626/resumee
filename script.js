@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
             summary: document.getElementById('summary').value || "Executive summary goes here...",
             experience: document.getElementById('experience').value,
             education: document.getElementById('education').value,
-            skills: document.getElementById('skills').value.split(',').map(s => s.trim()).filter(s => s)
+            skills: document.getElementById('skills').value.split(',').map(s => s.trim()).filter(s => s),
+            languages: document.getElementById('languages').value.split(',').map(s => s.trim()).filter(s => s),
+            declaration: document.getElementById('declaration').value || "I hereby declare that the information furnished above is true to the best of my knowledge."
         };
 
         const isFresher = fresherCheckbox.checked;
@@ -35,9 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('t8-experience').innerText = data.experience;
         document.getElementById('t8-education').innerText = data.education;
         document.getElementById('t8-exp-section').style.display = isFresher ? 'none' : 'block';
+        document.getElementById('t8-declaration').innerText = data.declaration;
 
         const t8Skills = document.getElementById('t8-skills');
         t8Skills.innerHTML = data.skills.map(s => `<div style="background:rgba(255,255,255,0.1); padding:5px; border-radius:4px; font-size:0.8rem;">• ${s}</div>`).join('');
+        
+        // Update Template 8 Languages
+        const t8Languages = document.getElementById('t8-languages');
+        t8Languages.innerHTML = data.languages.map(s => `<div style="background:rgba(255,255,255,0.1); padding:5px; border-radius:4px; font-size:0.8rem; margin-top: 5px;">• ${s}</div>`).join('');
+        document.getElementById('t8-lang-header').style.display = data.languages.length ? 'block' : 'none';
 
         // Update Template 1 (Modern)
         document.getElementById('t1-name').innerText = data.name;
@@ -50,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('t1-education').innerText = data.education;
         document.getElementById('t1-exp-section').style.display = isFresher ? 'none' : 'block';
         document.getElementById('t1-skills').innerHTML = data.skills.map(s => `<span class="t1-skill-tag">${s}</span>`).join('');
+        document.getElementById('t1-languages').innerHTML = data.languages.map(s => `<span class="t1-skill-tag">${s}</span>`).join('');
+        document.getElementById('t1-lang-header').style.display = data.languages.length ? 'block' : 'none';
+        document.getElementById('t1-declaration').innerText = data.declaration;
 
         // Update Template 2 (Classic)
         document.getElementById('t2-name').innerText = data.name;
@@ -62,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('t2-education').innerText = data.education;
         document.getElementById('t2-exp-section').style.display = isFresher ? 'none' : 'block';
         document.getElementById('t2-skills').innerText = data.skills.join(' • ');
+        document.getElementById('t2-languages').innerText = data.languages.join(' • ');
+        document.getElementById('t2-lang-header').style.display = data.languages.length ? 'block' : 'none';
+        document.getElementById('t2-declaration').innerText = data.declaration;
 
         // Update Template 7 (ATS)
         document.getElementById('t7-name').innerText = data.name;
@@ -74,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('t7-education').innerText = data.education;
         document.getElementById('t7-exp-section').style.display = isFresher ? 'none' : 'block';
         document.getElementById('t7-skills').innerText = data.skills.join(', ');
+        document.getElementById('t7-languages').innerText = data.languages.join(', ');
+        document.getElementById('t7-lang-header').style.display = data.languages.length ? 'block' : 'none';
+        document.getElementById('t7-declaration').innerText = data.declaration;
     }
 
     // Photo Upload
