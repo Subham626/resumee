@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="resume-form">
+            <header class="form-header">
+                <h1>Resume Builder</h1>
+                <p>Build your professional future in minutes.</p>
+            </header>
+
+            <div class="form-section">
+                <h3><i class="icon">👤</i> Personal Details</h3>
+                <div class="input-group">
+                    <label for="photo">Profile Photo</label>
+                    <input type="file" id="photo" accept="image/*">
+                </div>
+                <input type="text" id="name" placeholder="Full Name">
+                <input type="text" id="title" placeholder="Professional Title (Optional)">
+            </div>
+
+            <div class="form-section">
+                <h3><i class="icon">📞</i> Contact Information</h3>
+                <div class="grid-2">
+                    <input type="text" id="phone" placeholder="Phone Number">
+                    <input type="email" id="email" placeholder="Email Address">
+                </div>
+                <input type="text" id="linkedin" placeholder="LinkedIn Profile URL (Optional)">
+            </div>
+
+            <div class="form-section">
+                <h3><i class="icon">📝</i> Content</h3>
+                <textarea id="summary" rows="3" placeholder="Professional Summary"></textarea>
+                
+                <div class="fresher-toggle">
+                    <input type="checkbox" id="fresher-checkbox">
+                    <label for="fresher-checkbox">I am a fresher (Hide Experience)</label>
+                </div>
+
+                <textarea id="experience" rows="4" placeholder="Experience (Role @ Company)"></textarea>
+                <textarea id="education" rows="3" placeholder="Education (Degree @ University)"></textarea>
+                <input type="text" id="skills" placeholder="Skills (comma-separated)">
+            </div>
+
+            <div class="form-section">
+                <h3><i class="icon">🎨</i> Customization</h3>
+                <div class="grid-2">
+                    <div>
+                        <label>Theme</label>
+                        <input type="color" id="themeColor" value="#2c3e50">
+                    </div>
+                    <div>
+                        <label>Font</label>
+                        <select id="fontStyle">
+                            <option value="'Segoe UI', sans-serif">Modern Sans</option>
+                            <option value="'Times New Roman', serif">Classic Serif</option>
+                            <option value="'Courier New', monospace">Technical</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <label>Select Template</label>
+                <select id="templateSelector">
+                    <option value="template1">Template 1: Modern</option>
+                    <option value="template2">Template 2: Classic</option>
+                    <option value="template7">Template 7: ATS Standard</option>
+                    <option value="template8" selected>Template 8: Executive (New)</option>
+                </select>
+            </div>
+
+            <button id="download-btn" class="primary-btn">Download PDF</button>
+        </aside>
+
+        <main class="resume-preview">
+            <!-- Template 1: Modern -->
+            <div id="template1" class="resume-template" style="display:none;">
+                <div class="t1-header">
+                    <h1 id="t1-name"></h1>
+                    <h2 id="t1-title"></h2>
+                </div>
+                <div class="t1-contact">
+                    <span id="t1-phone"></span> • <span id="t1-email"></span><span class="linkedin-group"> • <span id="t1-linkedin"></span></span>
+                </div>
+                <div class="t1-content">
+                    <h3>Summary</h3>
+                    <p id="t1-summary"></p>
+                    <div id="t1-exp-section">
+                        <h3>Experience</h3>
+                        <pre id="t1-experience"></pre>
+                    </div>
+                    <h3>Education</h3>
+                    <pre id="t1-education"></pre>
+                    <h3>Skills</h3>
+                    <div id="t1-skills" class="t1-skills-list"></div>
+                </div>
+            </div>
+
+            <!-- Template 2: Classic -->
+            <div id="template2" class="resume-template" style="display:none;">
+                <div class="t2-header">
+                    <h1 id="t2-name"></h1>
+                    <p id="t2-title"></p>
+                    <p class="t2-contact">
+                        <span id="t2-phone"></span> | <span id="t2-email"></span><span class="linkedin-group"> | <span id="t2-linkedin"></span></span>
+                    </p>
+                </div>
+                <hr class="t2-hr">
+                <h3>Professional Summary</h3>
+                <p id="t2-summary"></p>
+                <div id="t2-exp-section">
+                    <h3>Work Experience</h3>
+                    <pre id="t2-experience"></pre>
+                </div>
+                <h3>Education</h3>
+                <pre id="t2-education"></pre>
+                <h3>Skills</h3>
+                <p id="t2-skills"></p>
+            </div>
+
+            <!-- Template 7: ATS Standard -->
+            <div id="template7" class="resume-template" style="display:none;">
+                <h1 id="t7-name"></h1>
+                <p id="t7-title"></p>
+                <p class="t7-contact">
+                    <span id="t7-phone"></span> | <span id="t7-email"></span><span class="linkedin-group"> | <span id="t7-linkedin"></span></span>
+                </p>
+                <h3>SUMMARY</h3>
+                <p id="t7-summary"></p>
+                <div id="t7-exp-section">
+                    <h3>EXPERIENCE</h3>
+                    <pre id="t7-experience"></pre>
+                </div>
+                <h3>EDUCATION</h3>
+                <pre id="t7-education"></pre>
+                <h3>SKILLS</h3>
+                <p id="t7-skills"></p>
+            </div>
+
+            <div id="template8" class="resume-template">
+                <div class="t8-sidebar">
+                    <div class="t8-photo-container">
+                        <img id="t8-photo" class="resume-photo" src="" alt="" style="display:none;">
+                    </div>
+                    <div class="t8-sidebar-content">
+                        <h4>CONTACT</h4>
+                        <p id="t8-phone"></p>
+                        <p id="t8-email"></p>
+                        <p id="t8-linkedin" class="linkedin-group" style="word-break: break-all;"></p>
+                        
+                        <h4>SKILLS</h4>
+                        <div id="t8-skills" class="t8-skills-list"></div>
+                    </div>
+                </div>
+                <div class="t8-main">
+                    <h1 id="t8-name">JANE DOE</h1>
+                    <h2 id="t8-title">Senior Executive</h2>
+                    <hr>
+                    <section>
+                        <h3>PROFILE</h3>
+                        <p id="t8-summary"></p>
+                    </section>
+                    <section id="t8-exp-section">
+                        <h3>PROFESSIONAL EXPERIENCE</h3>
+                        <pre id="t8-experience"></pre>
+                    </section>
+                    <section>
+                        <h3>EDUCATION</h3>
+                        <pre id="t8-education"></pre>
+                    </section>
+                </div>
+            </div>
+            
+            </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle LinkedIn visibility
+        const linkedinInput = document.getElementById('linkedin');
+        function toggleLinkedin() {
+            const val = linkedinInput.value.trim();
+            const groups = document.querySelectorAll('.linkedin-group');
+            groups.forEach(g => g.style.display = val ? '' : 'none');
+        }
+        linkedinInput.addEventListener('input', toggleLinkedin);
+        toggleLinkedin(); // Initialize
+
+        // Handle Download (Mobile & Desktop)
+        // Wait for load to ensure we override existing listeners
+        window.addEventListener('load', () => {
+            const downloadBtn = document.getElementById('download-btn');
+            if (downloadBtn) {
+                const newBtn = downloadBtn.cloneNode(true);
+                downloadBtn.parentNode.replaceChild(newBtn, downloadBtn);
+                
+                newBtn.addEventListener('click', () => {
+                    const activeTemplate = Array.from(document.querySelectorAll('.resume-template'))
+                        .find(t => t.style.display !== 'none');
+                    
+                    if (activeTemplate) {
+                        const opt = {
+                            margin: 0.2,
+                            filename: 'resume.pdf',
+                            image: { type: 'jpeg', quality: 0.98 },
+                            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                        };
+                        html2pdf().set(opt).from(activeTemplate).save();
+                    } else {
+                        alert('Please select a template.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

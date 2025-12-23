@@ -1,0 +1,182 @@
+/* Core Layout */
+:root {
+    --theme-color: #2c3e50;
+    --theme-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--theme-font);
+    background-color: #f0f2f5;
+    overflow: hidden; /* Prevent body scroll, use container scroll */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Form */
+.resume-form {
+    width: 450px;
+    background: #fff;
+    padding: 30px;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.form-header h1 { color: var(--theme-color); margin: 0; font-size: 1.5rem; }
+.form-section { margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; }
+.form-section h3 { font-size: 1rem; color: #555; margin-bottom: 15px; }
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Preview Area */
+.resume-preview {
+    flex: 1;
+    background: #525659; /* PDF viewer style */
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Template 8: Executive Style */
+#template8 {
+    width: 210mm; /* A4 Width */
+    min-height: 297mm;
+    background: white;
+    display: flex;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.t8-sidebar {
+    width: 30%;
+    background-color: var(--theme-color);
+    color: white;
+    padding: 30px 20px;
+}
+
+.t8-main {
+    width: 70%;
+    padding: 40px;
+}
+
+.t8-photo-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #eee;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    border: 3px solid rgba(255,255,255,0.3);
+}
+
+.t8-photo-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.t8-skills-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.t8-main h1 { font-size: 2.5rem; margin: 0; color: var(--theme-color); }
+.t8-main h2 { font-weight: 300; color: #666; margin-top: 5px; }
+.t8-main h3 { border-bottom: 2px solid var(--theme-color); padding-bottom: 5px; font-size: 1.1rem; }
+
+/* Buttons */
+.primary-btn {
+    background: var(--theme-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: opacity 0.3s;
+}
+.primary-btn:hover { opacity: 0.9; }
+
+/* Template 1: Modern */
+#template1 {
+    width: 210mm; min-height: 297mm; background: white; padding: 40px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4); flex-direction: column;
+}
+.t1-header { border-left: 5px solid var(--theme-color); padding-left: 20px; margin-bottom: 15px; }
+.t1-header h1 { color: var(--theme-color); margin: 0; font-size: 2.2rem; }
+.t1-header h2 { color: #555; margin: 5px 0 0; font-weight: 400; }
+.t1-contact { color: #666; font-size: 0.9rem; margin-bottom: 30px; padding-left: 25px; }
+.t1-content h3 { color: var(--theme-color); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 20px; }
+.t1-skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.t1-skill-tag { background: var(--theme-color); color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; }
+
+/* Template 2: Classic */
+#template2 {
+    width: 210mm; min-height: 297mm; background: white; padding: 50px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4); flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
+}
+.t2-header { text-align: center; }
+.t2-header h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; }
+.t2-header p { margin: 5px 0; color: #444; }
+.t2-contact { font-style: italic; font-size: 0.95rem; margin-top: 5px; }
+.t2-hr { border: 0; border-top: 2px solid #333; margin: 20px 0; }
+#template2 h3 { text-transform: uppercase; border-bottom: 1px solid #000; font-size: 1.1rem; margin-top: 25px; }
+#template2 pre { font-family: 'Times New Roman', Times, serif; white-space: pre-wrap; }
+
+/* Template 7: ATS Standard */
+#template7 {
+    width: 210mm; min-height: 297mm; background: white; padding: 40px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4); flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif; color: #000;
+}
+#template7 h1 { margin: 0 0 5px 0; font-size: 2rem; text-transform: uppercase; }
+#template7 p { margin: 2px 0; }
+.t7-contact { margin-bottom: 20px; font-size: 0.9rem; }
+#template7 h3 { margin-top: 20px; margin-bottom: 10px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #000; }
+#template7 pre { font-family: Arial, Helvetica, sans-serif; white-space: pre-wrap; margin: 0; }
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    body {
+        overflow: auto; /* Enable scrolling on body */
+    }
+
+    .app-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .resume-form {
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        box-shadow: none;
+        border-bottom: 1px solid #ddd;
+        z-index: 20;
+    }
+
+    .resume-preview {
+        display: flex;
+        justify-content: flex-start; /* Prevent clipping when centered */
+        overflow-x: auto;
+        padding: 30px 20px;
+    }
+
+    .resume-template {
+        margin: 0 auto; /* Center if space allows */
+        flex-shrink: 0; /* Prevent shrinking */
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
